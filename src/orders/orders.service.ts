@@ -7,6 +7,7 @@ import { ChangeOrderStatusDto } from './dto';
 import { NATS_SERVICE } from 'src/config';
 import { firstValueFrom } from 'rxjs';
 import { Product } from './entities/product.entity';
+import { OrderWithProducts } from './interfaces/order-with-products.interface';
 
 interface OrderItem {
   name: string | undefined;
@@ -185,5 +186,23 @@ export class OrdersService {
       where: { id },
       data: { status },
     });
+  }
+
+  async createPaymentSession(order: OrderWithProducts) {
+    const paymentSession = await firstValueFrom<unknown>(
+      this.client.send('create.payment.session', {
+        orderId: order.id,
+        currency: 'usd',
+        items: [
+          {
+            name: 'producto 1',
+            price: 100,
+            quantity: 2,
+          },
+        ],
+      }),
+    );
+
+    return paymentSession;
   }
 }

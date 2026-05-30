@@ -28,5 +28,5 @@ const envVars: EnvVars = res.value as EnvVars;
 
 export const envs = {
   port: envVars.PORT,
-  natsService: envVars.NATS_SERVERS,
+  natsServer: envVars.NATS_SERVERS,
 };

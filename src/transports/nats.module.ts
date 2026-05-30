@@ -13,7 +13,7 @@ import { NATS_SERVICE, envs } from 'src/config';
         options: {
           // host: envs.productMsHost,
           // port: envs.productMsPort,
-          servers: envs.natsService,
+          servers: envs.natsServer,
         },
       },
     ]),
@@ -28,7 +28,7 @@ import { NATS_SERVICE, envs } from 'src/config';
         options: {
           // host: envs.productMsHost,
           // port: envs.productMsPort,
-          servers: envs.natsService,
+          servers: envs.natsServer,
         },
       },
     ]),

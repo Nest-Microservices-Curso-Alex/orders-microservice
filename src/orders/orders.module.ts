@@ -18,7 +18,7 @@ import { envs, NATS_SERVICE } from 'src/config';
         options: {
           // host: envs.productMsHost,
           // port: envs.productMsPort,
-          servers: envs.natsService,
+          servers: envs.natsServer,
         },
       },
     ]),

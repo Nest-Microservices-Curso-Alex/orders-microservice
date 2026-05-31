@@ -205,7 +205,7 @@ export class OrdersService {
   }
 
   async paidOrder(paidOrderDto: PaidOrderDto) {
-    this.logger.log('Paid Order');
+    this.logger.log('Order Paid');
     this.logger.log(paidOrderDto);
 
     const order = await this.prisma.order.update({
@@ -217,11 +217,6 @@ export class OrdersService {
         stripeChargeId: paidOrderDto.stripePaymentId,
 
         // La relación
-        // orderReceipt: {
-        //   create: {
-        //     receiptUrl: paidOrderDto.receiptUrl,
-        //   },
-        // },
         orderReceipts: {
           create: {
             receiptUrl: paidOrderDto.receiptUrl,

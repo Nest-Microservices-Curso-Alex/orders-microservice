@@ -1,0 +1,23 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - -c
+      - |
+        docker build -t northamerica-south1-docker.pkg.dev/tienda-microservice-498922/image-registry/orders-ms -f dockerfile.prod --platform=linux/amd64 --build-arg ORDERS_DB_URL=$$DATABASE_URL .
+    secretEnv: ['DATABASE_URL']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'push',
+        'northamerica-south1-docker.pkg.dev/tienda-microservice-498922/image-registry/orders-ms',
+      ]
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/579269231834/secrets/ORDER_DB_URL/versions/1
+      env: 'DATABASE_URL'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
